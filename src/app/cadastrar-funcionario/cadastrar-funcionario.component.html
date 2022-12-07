@@ -1,0 +1,44 @@
+<h1>Cadastrar Funcionário</h1>
+
+<div class="well">
+  <form #formFuncionario="ngForm">
+    <div class="form-group">
+      <label for="nome">Funcionário:</label>
+      <input
+        type="text"
+        name="nome"
+        id="nome"
+        [(ngModel)]="funcionario.nome"
+        #nome="ngModel"
+        class="form-control"
+        minlength="5"
+        required
+      />
+      <div
+        *ngIf="nome.errors && (nome.touched || nome.dirty)"
+        class="alert alert-danger"
+      >
+        <div [hidden]="!nome.errors?.['required']">Digite o Funcionário</div>
+        <div [hidden]="!nome.errors?.['minlength']">
+          O Funcionário deve conter ao menos 5 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <input
+        type="submit"
+        value="Cadastrar"
+        class="btn btn-success"
+        (click)="cadastrar()"
+        [disabled]="!formFuncionario.form.valid"
+      />
+      <a routerLink="['/funcionarios']" class="btn btn-default">
+        <span
+          class="glyphicon glyphicon-chevron-left"
+          aria-hidden="true"
+        ></span>
+        Voltar
+      </a>
+    </div>
+  </form>
+</div>
